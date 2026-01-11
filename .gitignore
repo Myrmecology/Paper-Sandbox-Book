@@ -1,0 +1,198 @@
+# ============================================
+# MAXIMUM SECURITY .gitignore
+# ============================================
+
+# ============================================
+# YubiKey & Hardware Security Keys
+# ============================================
+*.yubikey
+*.yubico
+*yubikey*
+*yubico*
+yubikey-*/
+.yubico/
+ykman/
+ykpersonalize/
+yubikey.log
+yubikey-*.log
+piv-tool/
+*.p12
+*.pfx
+*.key
+*.pem
+*.crt
+*.cer
+*.der
+
+# ============================================
+# Environment & Secrets
+# ============================================
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env.*.local
+*.env
+secrets/
+secrets.json
+config/secrets/
+.secrets/
+credentials/
+*.credentials
+api-keys/
+*.apikey
+
+# ============================================
+# SSH & Certificates
+# ============================================
+*.ssh/
+id_rsa
+id_rsa.pub
+id_dsa
+id_dsa.pub
+id_ecdsa
+id_ecdsa.pub
+id_ed25519
+id_ed25519.pub
+known_hosts
+authorized_keys
+*.ppk
+*.kdbx
+
+# ============================================
+# GPG & PGP
+# ============================================
+*.gpg
+*.pgp
+*.asc
+.gnupg/
+secring.gpg
+pubring.gpg
+trustdb.gpg
+
+# ============================================
+# Node.js
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.npm
+.yarn/
+.pnp.*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ============================================
+# Build & Distribution
+# ============================================
+dist/
+dist-ssr/
+build/
+out/
+*.local
+.cache/
+.vite/
+.temp/
+.tmp/
+
+# ============================================
+# IDE & Editors
+# ============================================
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Operating System
+# ============================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ============================================
+# Logs
+# ============================================
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# ============================================
+# Testing
+# ============================================
+coverage/
+*.lcov
+.nyc_output/
+.jest/
+
+# ============================================
+# Database & Data
+# ============================================
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.dump
+data/
+backup/
+
+# ============================================
+# Security Tokens & Authentication
+# ============================================
+*.token
+*.jwt
+.auth/
+auth-tokens/
+oauth/
+.oauth2/
+bearer-tokens/
+
+# ============================================
+# Sensitive Files
+# ============================================
+*secret*
+*password*
+*private*
+.htpasswd
+.htaccess
+
+# ============================================
+# Backup Files
+# ============================================
+*.bak
+*.backup
+*.old
+*.orig
+*~
+
+# ============================================
+# Temporary Files
+# ============================================
+tmp/
+temp/
+*.tmp
+*.temp
