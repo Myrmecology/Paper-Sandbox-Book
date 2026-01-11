@@ -1,0 +1,203 @@
+/* ============================================
+   COSMIC THEME VARIABLES
+   ============================================ */
+
+:root {
+  /* Primary Colors */
+  --color-primary: #8a2be2;
+  --color-primary-light: #9d4edd;
+  --color-primary-dark: #6a0dad;
+  --color-secondary: #00d9ff;
+  --color-accent: #ff006e;
+  
+  /* Cosmic Colors */
+  --color-nebula-purple: #7209b7;
+  --color-nebula-pink: #f72585;
+  --color-nebula-blue: #4361ee;
+  --color-star-white: #fffdef;
+  --color-space-black: #000000;
+  --color-deep-space: #0a0a0a;
+  
+  /* Gradients */
+  --gradient-cosmic: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-nebula: radial-gradient(ellipse at center, #7209b7 0%, #3a0ca3 50%, #000000 100%);
+  --gradient-aurora: linear-gradient(90deg, #00d9ff, #8a2be2, #ff006e);
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Typography */
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Shadows */
+  --shadow-glow: 0 0 20px rgba(138, 43, 226, 0.5);
+  --shadow-glow-strong: 0 0 40px rgba(138, 43, 226, 0.8);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  
+  /* Z-Index Layers */
+  --z-background: -1;
+  --z-base: 0;
+  --z-content: 10;
+  --z-overlay: 100;
+  --z-modal: 1000;
+  --z-tooltip: 10000;
+}
+
+/* ============================================
+   GLASSMORPHISM UTILITIES
+   ============================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+.glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.glow-strong {
+  box-shadow: var(--shadow-glow-strong);
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.8),
+               0 0 20px rgba(138, 43, 226, 0.6),
+               0 0 30px rgba(138, 43, 226, 0.4);
+}
+
+.text-glow-white {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+               0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+
+.gradient-text {
+  background: var(--gradient-aurora);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cosmic {
+  background: var(--gradient-cosmic);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(138, 43, 226, 0.8);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* ============================================
+   RESPONSIVE UTILITIES
+   ============================================ */
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    font-size: 12px;
+  }
+}
