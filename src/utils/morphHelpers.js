@@ -9,7 +9,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 /**
  * Generate random positions in a sphere
  */
-export const generateSpherePositions = (count, radius = 5) => {
+export const generateSpherePositions = (count, radius = 10) => {  // INCREASED default radius
   const positions = new Float32Array(count * 3);
   
   for (let i = 0; i < count; i++) {
@@ -41,12 +41,12 @@ export const generateTextPositions = async (text, count, fontUrl = '/fonts/helve
       (font) => {
         const geometry = new TextGeometry(text, {
           font: font,
-          size: 2,
-          height: 0.2,
+          size: 4,  // INCREASED from 2
+          height: 0.5,  // INCREASED
           curveSegments: 12,
           bevelEnabled: true,
-          bevelThickness: 0.03,
-          bevelSize: 0.02,
+          bevelThickness: 0.1,  // INCREASED
+          bevelSize: 0.05,  // INCREASED
           bevelSegments: 5
         });
         
@@ -75,24 +75,24 @@ export const generateGeometryPositions = (geometryType, count, params = {}) => {
   
   switch (geometryType) {
     case 'sphere':
-      geometry = new THREE.SphereGeometry(params.radius || 3, 64, 64);
+      geometry = new THREE.SphereGeometry(params.radius || 6, 64, 64);  // INCREASED
       break;
     case 'torus':
-      geometry = new THREE.TorusGeometry(params.radius || 3, params.tube || 1, 32, 64);
+      geometry = new THREE.TorusGeometry(params.radius || 6, params.tube || 2, 32, 64);  // INCREASED
       break;
     case 'crystal':
-      geometry = new THREE.OctahedronGeometry(params.radius || 3, 0);
+      geometry = new THREE.OctahedronGeometry(params.radius || 6, 0);  // INCREASED
       break;
     case 'ring':
-      geometry = new THREE.TorusGeometry(params.radius || 4, params.tube || 0.3, 16, 100);
+      geometry = new THREE.TorusGeometry(params.radius || 8, params.tube || 0.6, 16, 100);  // INCREASED
       break;
     case 'spaceship':
       geometry = createSpaceshipGeometry(params);
       break;
     case 'stars':
-      return generateStarFieldPositions(count, params.spread || 10);
+      return generateStarFieldPositions(count, params.spread || 15);  // INCREASED
     default:
-      geometry = new THREE.SphereGeometry(3, 32, 32);
+      geometry = new THREE.SphereGeometry(6, 32, 32);  // INCREASED
   }
   
   const positions = sampleGeometryPositions(geometry, count);
@@ -117,7 +117,7 @@ const sampleGeometryPositions = (geometry, count) => {
     positions[i * 3 + 2] = vertices[randomIndex + 2];
     
     // Add slight randomness for organic look
-    const offset = 0.1;
+    const offset = 0.2;  // INCREASED
     positions[i * 3] += (Math.random() - 0.5) * offset;
     positions[i * 3 + 1] += (Math.random() - 0.5) * offset;
     positions[i * 3 + 2] += (Math.random() - 0.5) * offset;
@@ -129,7 +129,7 @@ const sampleGeometryPositions = (geometry, count) => {
 /**
  * Generate star field positions
  */
-const generateStarFieldPositions = (count, spread = 10) => {
+const generateStarFieldPositions = (count, spread = 15) => {  // INCREASED
   const positions = new Float32Array(count * 3);
   
   for (let i = 0; i < count; i++) {
@@ -138,7 +138,7 @@ const generateStarFieldPositions = (count, spread = 10) => {
     const clusterY = (Math.random() - 0.5) * spread;
     const clusterZ = (Math.random() - 0.5) * spread;
     
-    const localSpread = 2;
+    const localSpread = 3;  // INCREASED
     positions[i * 3] = clusterX + (Math.random() - 0.5) * localSpread;
     positions[i * 3 + 1] = clusterY + (Math.random() - 0.5) * localSpread;
     positions[i * 3 + 2] = clusterZ + (Math.random() - 0.5) * localSpread;
@@ -155,8 +155,8 @@ const createSpaceshipGeometry = (params = {}) => {
   const vertices = [];
   
   // Simple spaceship shape (cone + wings)
-  const height = params.height || 4;
-  const width = params.width || 2;
+  const height = params.height || 8;  // INCREASED
+  const width = params.width || 4;  // INCREASED
   
   // Main body (cone)
   for (let i = 0; i < 100; i++) {
@@ -175,12 +175,12 @@ const createSpaceshipGeometry = (params = {}) => {
   for (let i = 0; i < 50; i++) {
     const t = i / 50;
     vertices.push(
-      -width * 1.5 * t,
+      -width * 2 * t,  // INCREASED
       -height * 0.3,
       0
     );
     vertices.push(
-      width * 1.5 * t,
+      width * 2 * t,  // INCREASED
       -height * 0.3,
       0
     );
@@ -248,20 +248,33 @@ export const generateColorGradient = (color1, color2, count) => {
 };
 
 /**
- * Apply color theme to particles
+ * Apply color theme to particles - BRIGHTER COLORS
  */
 export const applyColorTheme = (theme, count) => {
   const colors = new Float32Array(count * 3);
   const primaryColor = new THREE.Color(theme.primary);
   const accentColor = new THREE.Color(theme.accent);
+  const particleColor = new THREE.Color(theme.particle);
   
   for (let i = 0; i < count; i++) {
     const t = Math.random();
-    const color = primaryColor.clone().lerp(accentColor, t);
+    let color;
     
-    colors[i * 3] = color.r;
-    colors[i * 3 + 1] = color.g;
-    colors[i * 3 + 2] = color.b;
+    // Mix between primary, accent, and particle colors
+    if (t < 0.3) {
+      color = primaryColor.clone();
+    } else if (t < 0.7) {
+      color = accentColor.clone();
+    } else {
+      color = particleColor.clone();
+    }
+    
+    // Brighten the color
+    color.multiplyScalar(1.5);
+    
+    colors[i * 3] = Math.min(color.r, 1.0);
+    colors[i * 3 + 1] = Math.min(color.g, 1.0);
+    colors[i * 3 + 2] = Math.min(color.b, 1.0);
   }
   
   return colors;
@@ -274,7 +287,7 @@ export const applyColorTheme = (theme, count) => {
 /**
  * Normalize positions to fit within bounds
  */
-export const normalizePositions = (positions, maxBound = 5) => {
+export const normalizePositions = (positions, maxBound = 10) => {  // INCREASED
   let maxDistance = 0;
   
   for (let i = 0; i < positions.length; i += 3) {
@@ -298,7 +311,7 @@ export const normalizePositions = (positions, maxBound = 5) => {
 /**
  * Add random offset to positions for variety
  */
-export const addRandomOffset = (positions, amount = 0.1) => {
+export const addRandomOffset = (positions, amount = 0.2) => {  // INCREASED
   const result = new Float32Array(positions.length);
   
   for (let i = 0; i < positions.length; i++) {

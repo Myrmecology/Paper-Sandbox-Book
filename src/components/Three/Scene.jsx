@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import ParticleSystem from './ParticleSystem';
+import CosmicObjects from './CosmicObjects';
 import MorphingObjects from './MorphingObjects';
 import CameraController from './CameraController';
 import Effects from './Effects';
@@ -29,9 +30,10 @@ const Scene = () => {
         }}
       >
         {/* Ambient Lighting */}
-        <ambientLight intensity={0.3} />
-        <pointLight position={[10, 10, 10]} intensity={0.5} />
-        <pointLight position={[-10, -10, -10]} intensity={0.3} color="#8a2be2" />
+        <ambientLight intensity={0.4} />
+        <pointLight position={[10, 10, 10]} intensity={1.0} color="#ffffff" />
+        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8a2be2" />
+        <pointLight position={[0, 10, -10]} intensity={0.7} color="#00d9ff" />
 
         {/* Background Stars */}
         <Stars
@@ -44,9 +46,14 @@ const Scene = () => {
           speed={0.5}
         />
 
-        {/* Main Particle System */}
+        {/* Main Particle System (reduced count) */}
         <Suspense fallback={null}>
           <ParticleSystem count={PARTICLE_CONFIG.COUNT} />
+        </Suspense>
+
+        {/* 3D Cosmic Objects (planets, rings, orbitals) */}
+        <Suspense fallback={null}>
+          <CosmicObjects />
         </Suspense>
 
         {/* Morphing Logic Controller */}
@@ -62,13 +69,16 @@ const Scene = () => {
           </Suspense>
         )}
 
-        {/* Orbit Controls for user interaction (subtle) */}
+        {/* Orbit Controls for user interaction */}
         <OrbitControls
-          enableZoom={false}
+          enableZoom={true}
           enablePan={false}
           enableRotate={true}
           rotateSpeed={0.3}
-          minPolarAngle={Math.PI / 3}
+          zoomSpeed={0.5}
+          minDistance={10}
+          maxDistance={50}
+          minPolarAngle={Math.PI / 4}
           maxPolarAngle={Math.PI / 1.5}
         />
       </Canvas>

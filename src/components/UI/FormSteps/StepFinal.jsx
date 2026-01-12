@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import FormContainer from '../FormContainer';
 import Button from '../Button';
 import useFormState from '../../../hooks/useFormState';
@@ -11,6 +11,7 @@ import { COSMIC_SYMBOLS } from '../../../utils/constants';
  */
 const StepFinal = () => {
   const { profileData, resetForm, completeProfile } = useFormState();
+  const [hideUI, setHideUI] = useState(false);
 
   // Complete the profile on mount
   useEffect(() => {
@@ -21,7 +22,7 @@ const StepFinal = () => {
     width: '100%',
     padding: '2rem',
     background: 'rgba(138, 43, 226, 0.1)',
-    borderRadius: 'var(--radius-lg)',
+    borderRadius: '12px',
     border: '2px solid rgba(138, 43, 226, 0.3)',
     marginTop: '1rem'
   };
@@ -46,7 +47,7 @@ const StepFinal = () => {
     fontSize: '1.2rem',
     color: '#ffffff',
     fontWeight: '700',
-    fontFamily: 'var(--font-heading)'
+    fontFamily: "'Orbitron', sans-serif"
   };
 
   const colorSwatchStyles = (color) => ({
@@ -61,6 +62,46 @@ const StepFinal = () => {
   const symbolData = profileData.symbol 
     ? COSMIC_SYMBOLS[profileData.symbol.toUpperCase()] 
     : null;
+
+  // Hidden UI overlay - shows "Press ESC to return" when UI is hidden
+  if (hideUI) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        style={{
+          position: 'fixed',
+          top: '2rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 100
+        }}
+      >
+        <motion.div
+          style={{
+            padding: '1rem 2rem',
+            background: 'rgba(0, 0, 0, 0.5)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(138, 43, 226, 0.3)',
+            borderRadius: '12px',
+            color: '#ffffff',
+            fontSize: '1rem',
+            fontFamily: "'Space Grotesk', sans-serif",
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+            cursor: 'pointer'
+          }}
+          onClick={() => setHideUI(false)}
+          whileHover={{ scale: 1.05 }}
+        >
+          <span>Press ESC or click here to return</span>
+          <span style={{ fontSize: '1.2rem' }}>✨</span>
+        </motion.div>
+      </motion.div>
+    );
+  }
 
   return (
     <FormContainer
@@ -139,7 +180,7 @@ const StepFinal = () => {
             marginBottom: '1rem'
           }}
         >
-          Watch as your universe comes alive with <strong style={{ color: '#9d4edd' }}>50,000 particles</strong> 
+          Watch as your universe comes alive with <strong style={{ color: '#9d4edd' }}>50,000 particles</strong>
           {' '}morphing and dancing through space. Your cosmic journey is complete! 🚀
         </p>
       </motion.div>
@@ -166,10 +207,7 @@ const StepFinal = () => {
         </Button>
         
         <Button
-          onClick={() => {
-            // Optional: Add functionality to hide UI and just show the scene
-            console.log('Enjoying the view!');
-          }}
+          onClick={() => setHideUI(true)}
           variant="secondary"
           fullWidth
         >

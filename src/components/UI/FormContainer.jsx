@@ -8,60 +8,70 @@ import { motion, AnimatePresence } from 'framer-motion';
 const FormContainer = ({ children, title, subtitle, step, totalSteps }) => {
   const containerStyles = {
     position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '0',
+    margin: 'auto',
     width: '90%',
     maxWidth: '600px',
-    padding: '3rem 2rem',
-    background: 'rgba(0, 0, 0, 0.4)',
+    height: 'fit-content',
+    maxHeight: '85vh',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    padding: '2rem 1.5rem',
+    background: 'rgba(0, 0, 0, 0.5)',
     backdropFilter: 'blur(20px)',
     WebkitBackdropFilter: 'blur(20px)',
     border: '1px solid rgba(138, 43, 226, 0.3)',
-    borderRadius: 'var(--radius-xl)',
+    borderRadius: '16px',
     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.6), 0 0 60px rgba(138, 43, 226, 0.2)',
     zIndex: 100,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+    scrollbarWidth: 'thin',
+    scrollbarColor: 'rgba(138, 43, 226, 0.5) rgba(0, 0, 0, 0.3)'
   };
 
   const progressBarStyles = {
     width: '100%',
     height: '4px',
     background: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 'var(--radius-full)',
+    borderRadius: '9999px',
     overflow: 'hidden',
-    marginBottom: '2rem'
+    marginBottom: '1.5rem',
+    flexShrink: 0
   };
 
   const progressFillStyles = {
     height: '100%',
     background: 'linear-gradient(90deg, #8a2be2, #9d4edd)',
-    borderRadius: 'var(--radius-full)',
+    borderRadius: '9999px',
     transition: 'width 0.5s ease',
     boxShadow: '0 0 10px rgba(138, 43, 226, 0.6)'
   };
 
   const titleStyles = {
-    fontSize: '2.5rem',
-    fontFamily: 'var(--font-heading)',
+    fontSize: '2rem',
+    fontFamily: "'Orbitron', sans-serif",
     fontWeight: '700',
-    marginBottom: '1rem',
+    marginBottom: '0.75rem',
     background: 'linear-gradient(135deg, #ffffff, #9d4edd)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
-    textShadow: '0 0 20px rgba(138, 43, 226, 0.5)'
+    flexShrink: 0
   };
 
   const subtitleStyles = {
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     color: 'rgba(255, 255, 255, 0.7)',
-    marginBottom: '2rem',
-    fontFamily: 'var(--font-body)',
-    lineHeight: '1.6'
+    marginBottom: '1.5rem',
+    fontFamily: "'Space Grotesk', sans-serif",
+    lineHeight: '1.6',
+    flexShrink: 0
   };
 
   const contentStyles = {
@@ -69,7 +79,8 @@ const FormContainer = ({ children, title, subtitle, step, totalSteps }) => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '1.5rem'
+    gap: '1.5rem',
+    paddingBottom: '1rem'
   };
 
   // Calculate progress percentage
@@ -78,9 +89,9 @@ const FormContainer = ({ children, title, subtitle, step, totalSteps }) => {
   return (
     <motion.div
       style={containerStyles}
-      initial={{ opacity: 0, scale: 0.9, y: 50 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9, y: -50 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       {/* Progress Bar */}
@@ -181,6 +192,24 @@ const FormContainer = ({ children, title, subtitle, step, totalSteps }) => {
           borderRadius: '0 0 4px 0'
         }}
       />
+
+      {/* Custom Scrollbar Styling */}
+      <style>{`
+        div::-webkit-scrollbar {
+          width: 8px;
+        }
+        div::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 4px;
+        }
+        div::-webkit-scrollbar-thumb {
+          background: rgba(138, 43, 226, 0.5);
+          border-radius: 4px;
+        }
+        div::-webkit-scrollbar-thumb:hover {
+          background: rgba(138, 43, 226, 0.8);
+        }
+      `}</style>
     </motion.div>
   );
 };

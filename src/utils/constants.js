@@ -18,18 +18,18 @@ export const COLOR_THEMES = {
   NEBULA_PURPLE: {
     id: 'nebula_purple',
     name: 'Nebula Purple',
-    primary: '#7209b7',
-    secondary: '#9d4edd',
-    accent: '#c77dff',
-    particle: '#e0aaff'
+    primary: '#b537f2',
+    secondary: '#e879f9',
+    accent: '#f0abfc',
+    particle: '#fae8ff'
   },
   COSMIC_BLUE: {
     id: 'cosmic_blue',
     name: 'Cosmic Blue',
-    primary: '#4361ee',
-    secondary: '#4895ef',
-    accent: '#4cc9f0',
-    particle: '#7209b7'
+    primary: '#3b82f6',
+    secondary: '#60a5fa',
+    accent: '#93c5fd',
+    particle: '#dbeafe'
   },
   SOLAR_FLARE: {
     id: 'solar_flare',
@@ -37,31 +37,31 @@ export const COLOR_THEMES = {
     primary: '#ff006e',
     secondary: '#fb5607',
     accent: '#ffbe0b',
-    particle: '#ff006e'
+    particle: '#fff3b0'
   },
   AURORA_GREEN: {
     id: 'aurora_green',
     name: 'Aurora Green',
     primary: '#06ffa5',
-    secondary: '#00d9ff',
-    accent: '#4361ee',
-    particle: '#06ffa5'
+    secondary: '#4ade80',
+    accent: '#86efac',
+    particle: '#d1fae5'
   },
   GALAXY_PINK: {
     id: 'galaxy_pink',
     name: 'Galaxy Pink',
-    primary: '#f72585',
-    secondary: '#b5179e',
-    accent: '#7209b7',
-    particle: '#f72585'
+    primary: '#ff006e',
+    secondary: '#f72585',
+    accent: '#ff6bb5',
+    particle: '#ffc8dd'
   },
   STELLAR_GOLD: {
     id: 'stellar_gold',
     name: 'Stellar Gold',
     primary: '#ffd60a',
     secondary: '#ffc300',
-    accent: '#ff9e00',
-    particle: '#ffd60a'
+    accent: '#ffea00',
+    particle: '#fffacd'
   }
 };
 
@@ -111,11 +111,11 @@ export const COSMIC_SYMBOLS = {
   }
 };
 
-// Particle System Configuration
+// Particle System Configuration - REDUCED FOR PERFORMANCE
 export const PARTICLE_CONFIG = {
-  COUNT: 50000,
-  SIZE: 0.05,
-  SIZE_RANGE: [0.02, 0.08],
+  COUNT: 10000,  // REDUCED from 50000
+  SIZE: 2.0,
+  SIZE_RANGE: [0.3, 1.5],
   SPEED: 0.5,
   SPREAD: 15,
   MORPH_DURATION: 2.0,
@@ -127,13 +127,13 @@ export const CAMERA_CONFIG = {
   FOV: 75,
   NEAR: 0.1,
   FAR: 1000,
-  INITIAL_POSITION: [0, 0, 10],
+  INITIAL_POSITION: [0, 0, 15],
   POSITIONS: {
-    WELCOME: [0, 0, 15],
-    NAME: [0, 2, 12],
-    COLORS: [5, 0, 10],
-    SYMBOL: [-5, 3, 12],
-    FINAL: [0, 5, 20]
+    WELCOME: [0, 0, 20],
+    NAME: [0, 3, 18],
+    COLORS: [8, 0, 15],
+    SYMBOL: [-8, 4, 18],
+    FINAL: [0, 8, 25]
   },
   TRANSITION_DURATION: 2.0
 };
@@ -149,29 +149,29 @@ export const ANIMATION_TIMING = {
 
 // Text Configurations for Particle Text
 export const TEXT_CONFIG = {
-  FONT_SIZE: 2,
-  FONT_DEPTH: 0.2,
+  FONT_SIZE: 4,
+  FONT_DEPTH: 0.3,
   CURVE_SEGMENTS: 12,
   BEVEL_ENABLED: true,
-  BEVEL_THICKNESS: 0.03,
-  BEVEL_SIZE: 0.02,
+  BEVEL_THICKNESS: 0.05,
+  BEVEL_SIZE: 0.03,
   BEVEL_SEGMENTS: 5
 };
 
 // Post-processing Effects
 export const EFFECTS_CONFIG = {
   BLOOM: {
-    intensity: 1.5,
-    luminanceThreshold: 0.2,
+    intensity: 2.5,
+    luminanceThreshold: 0.15,
     luminanceSmoothing: 0.9,
     mipmapBlur: true
   },
   CHROMATIC_ABERRATION: {
-    offset: [0.002, 0.002]
+    offset: [0.003, 0.003]
   },
   VIGNETTE: {
     offset: 0.3,
-    darkness: 0.5
+    darkness: 0.6
   }
 };
 
